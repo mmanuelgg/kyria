@@ -441,14 +441,18 @@ void keyboard_post_init_user(void){
     layer_state_set_user(layer_state);
 }
 layer_state_t layer_state_set_user(layer_state_t state){
-    switch (get_highest_layer(state)) {
+    //switch (get_highest_layer(state)) {
+    switch (get_highest_layer(default_layer_state)) {
         case _GAMING:
             rgblight_sethsv_noeeprom(HSV_CYAN);
+            //rgblight_sethsv(HSV_CYAN);
             break;
         default:
             rgblight_sethsv_noeeprom(HSV_PURPLE);
+            //rgblight_sethsv(HSV_PURPLE);
             break;
     }
+    //return state;
     return state;
 }
 #endif

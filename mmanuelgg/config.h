@@ -31,7 +31,7 @@
 #    define RGBLIGHT_SPLIT
 #    define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING
 #    define RGBLIGHT_DEFAULT_HUE 250
-//#    define RGBLIGHT_LAYERS
+#    define RGBLIGHT_LAYERS
 #endif
 
 // Lets you roll mod-tap keys
