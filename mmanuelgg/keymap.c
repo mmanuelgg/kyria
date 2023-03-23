@@ -15,6 +15,13 @@
  */
 #include QMK_KEYBOARD_H
 #include <stdio.h>
+#define ANIM_INVERT false
+#define ANIM_RENDER_WPM true
+#define FAST_TYPE_WPM 45 //Switch to fast animation when over words per minute
+
+#ifdef OLED_DRIVER_ENABLE
+    #include "crab.c"
+#endif
 
 char wpm_str[10];
 static uint16_t key_timer; // timer para controlar el tiempo
@@ -183,9 +190,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: GAMING
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   | ESC  |   Q  |   W  |   E  |   R  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
+ * |  Tab   | ESC  |   Q  |   W  |   E  |   R  |                              |   Y  |   U  |   ↑  |   O  |   P  |  Bksp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |    G   |LShift|   A  |   S  |   D  |   F  |                              |   H  |   J  |   K  |   L  | ;  : |Ctrl/' "|
+ * |    G   |LShift|   A  |   S  |   D  |   F  |                              |   H  |  ←   |   ↓  |   →  | ;  : |Ctrl/' "|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |    T   |LCtrl |   Z  |   X  |   C  |   V  |  B   |VolMut|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -194,8 +201,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_GAMING] = LAYOUT(
-     KC_TAB  , KC_ESC  ,  KC_Q  ,  KC_W  ,  KC_E ,  KC_R ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     KC_G    , KC_LSFT ,  KC_A  ,  KC_S  ,  KC_D ,  KC_F ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , KC_SCLN, CTL_QUOT,
+     KC_TAB  , KC_ESC  ,  KC_Q  ,  KC_W  ,  KC_E ,  KC_R ,                                        KC_Y,  KC_U , KC_UP ,  KC_O ,  KC_P , KC_BSPC,
+     KC_G    , KC_LSFT ,  KC_A  ,  KC_S  ,  KC_D ,  KC_F ,                                        KC_H,KC_LEFT,KC_DOWN,KC_RGHT,KC_SCLN, CTL_QUOT,
      KC_T    , KC_LCTL ,  KC_Z  ,  KC_X  ,  KC_C ,  KC_V , KC_B , KC_MUTE,     FKEYS  , KC_RBRC, TD(TD_ENE),   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
                                   ADJUST ,  KC_M, KC_LALT ,KC_SPC , GAME ,     SYM    , KC_SPC ,KC_RALT, NAV , KC_APP
     ),
@@ -204,9 +211,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  * Game Layer
 //  *
 //  * ,-------------------------------------------.                              ,-------------------------------------------.
-//  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+//  * |        |   1  |   2  |   3  |   4  |   5  |                              |      |      |      |      |      |        |
 //  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-//  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
+//  * |        |   I  |   J  |   K  |   L  |      |                              |      |      |      |      |      | Enter  |
 //  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
 //  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
 //  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -216,7 +223,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  */
      [_GAME] = LAYOUT(
        _______,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                     _______, _______, _______, _______, _______, _______,
-       _______,   KC_I ,   KC_J , _______, _______, _______,                                     _______, _______, _______, _______, _______, KC_ENT ,
+       _______,   KC_I ,   KC_J ,  KC_K ,   KC_L  , _______,                                     _______, _______, _______, _______, _______, KC_ENT ,
        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
      ),
@@ -333,8 +340,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * DO NOT edit the rev1.c file; instead override the weakly defined default functions by your own.
  */
 
+// My oled is 128x64
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
+
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
@@ -349,7 +358,7 @@ bool oled_task_user(void) {
         // clang-format on
 
         //oled_write_P(qmk_logo, false);
-        oled_write_P(PSTR("Kyria - mmanuelgg\n"), false);
+        oled_write_P(PSTR("mmanuelgg\n\n"), false);
 
         // Host Keyboard Layer Status
         oled_write_P(PSTR("Layer: "), false);
@@ -393,7 +402,9 @@ bool oled_task_user(void) {
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
 
         sprintf(wpm_str, "WPM: %03d", get_current_wpm());
-        oled_write(wpm_str, false);
+        oled_write_P(wpm_str, false);
+
+
     } else {
         // clang-format off
         static const char PROGMEM kyria_logo[] = {
