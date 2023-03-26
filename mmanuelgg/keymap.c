@@ -357,7 +357,11 @@ bool oled_task_user(void) {
         // clang-format on
 
         //oled_write_P(qmk_logo, false);
-        oled_write_P(PSTR("mmanuelgg\n\n"), false);
+        oled_write_P(PSTR("mmanuelgg Journey\n"), false);
+        oled_write_P(PSTR("          Before\n"), false);
+        sprintf(wpm_str, "WPM: %03d", get_current_wpm());
+        oled_write_P(wpm_str, false);
+        oled_write_P(PSTR("  Destination\n"), false);
 
         // Host Keyboard Layer Status
         oled_write_P(PSTR("Layer: "), false);
@@ -396,12 +400,10 @@ bool oled_task_user(void) {
 
         // Write host Keyboard LED Status to OLEDs
         led_t led_usb_state = host_keyboard_led_state();
-        oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
+        oled_write_P(PSTR("\n"), false);
         oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
-        oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
-
-        sprintf(wpm_str, "WPM: %03d", get_current_wpm());
-        oled_write_P(wpm_str, false);
+        oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
+        //oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
 
 
     } else {
