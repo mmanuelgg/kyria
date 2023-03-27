@@ -38,7 +38,7 @@
 #define IGNORE_MOD_TAP_INTERRUPT
 
 // Tiempo entre pulsaciones para tap dance
-#define TAPPING_TERM 170
+#define TAPPING_TERM 150
 
 // Mouse config
 // Constant mode
