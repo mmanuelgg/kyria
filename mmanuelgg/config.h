@@ -16,6 +16,13 @@
 
 #pragma once
 
+#ifdef WPM_ENABLE
+#    define SPLIT_WPM_ENABLE
+#endif 
+
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_OLED_ENABLE
+
 #ifdef RGBLIGHT_ENABLE
 // Default
 #    define RGBLIGHT_EFFECT_BREATHING
