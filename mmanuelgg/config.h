@@ -16,9 +16,9 @@
 
 #pragma once
 
-#ifdef WPM_ENABLE
-#    define SPLIT_WPM_ENABLE
-#endif 
+//#ifdef WPM_ENABLE
+//#    define SPLIT_WPM_ENABLE
+//#endif 
 
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_OLED_ENABLE
