@@ -63,7 +63,7 @@ void post_encoder_update_user(uint8_t index, bool clockwise){
 // Function TAP DANCE
 void tdStart(tap_dance_state_t *state, void *user_data){
     if (state->count == 1){
-        register_code16(KC_N);
+        register_code16(KC_SCLN);
     }else{
         SEND_STRING(SS_DOWN(X_RALT) SS_TAP(X_N));
         clear_keyboard();
@@ -72,7 +72,7 @@ void tdStart(tap_dance_state_t *state, void *user_data){
 
 void tdReset(tap_dance_state_t *state, void *user_data){
     if (state->count == 1){
-        unregister_code16(KC_N);
+        unregister_code16(KC_SCLN);
     }
 }
 
@@ -137,8 +137,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , KC_SCLN, CTL_QUOT,
-     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, TD(TD_ENE),   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , TD(TD_ENE), CTL_QUOT,
+     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
                                 ADJUST , KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC , ALG_ENT , NAV , KC_APP
     ),
 
