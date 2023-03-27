@@ -231,20 +231,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Media, navigation
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |MSACL0|MSACL1|MSACL2|      |      |                              | Home | End  | PgUp | PgDn | WHUP | Delete |
+ * |        | LPAD |      |      |      |      |                              | Home | End  | PgUp | PgDn | WHUP | Delete |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |  LPAD  |  GUI | BTN2 |  M↑  | BTN3 | BTN5 |                              |  ←   |   ↓  |   ↑  |   →  | WHDN | Insert |
+ * |  MCTL  |MSACL1| BTN2 |  M↑  | BTN3 | BTN5 |                              |  ←   |   ↓  |   ↑  |   →  | WHDN | Insert |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |  MCTL  | BTN1 |  M←  |  M↓  |  M→  | BTN4 |      |      |  |      | WHLT | WHRT | BTN1 | BTN2 | BTN3 | BTN4 | PrtSc  |
+ * | MSACL0 | BTN1 |  M←  |  M↓  |  M→  | BTN4 |      | GUI  |  |      | WHLT | WHRT | BTN1 | BTN2 | BTN3 | BTN4 | PrtSc  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |M Prev|M Play|M Next| BTN5 |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
-      _______, KC_ACL0, KC_ACL1, KC_ACL2, _______, _______,                                     KC_HOME, KC_END , KC_PGUP, KC_PGDN, KC_WH_U, KC_DEL,
-      KC_LPAD, KC_LGUI, KC_BTN2, KC_MS_U, KC_BTN3, KC_BTN5,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_WH_D, KC_INS,
-      KC_MCTL, KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN4, _______, _______, _______, KC_WH_L, KC_WH_R, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_PSCR,
+      _______, KC_LPAD, _______, _______, _______, _______,                                     KC_HOME, KC_END , KC_PGUP, KC_PGDN, KC_WH_U, KC_DEL,
+      KC_MCTL, KC_ACL1, KC_BTN2, KC_MS_U, KC_BTN3, KC_BTN5,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_WH_D, KC_INS,
+      KC_ACL0, KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN4, _______, KC_LGUI, _______, KC_WH_L, KC_WH_R, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_PSCR,
                                  _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_BTN5, _______
     ),
 

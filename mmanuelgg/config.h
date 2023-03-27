@@ -39,3 +39,18 @@
 
 // Tiempo entre pulsaciones para tap dance
 #define TAPPING_TERM 170
+
+// Mouse config
+// Constant mode
+//#define MK_3_SPEED
+//#define MK_MOMENTARY_ACCEL
+//#define MK_C_OFFSET_UNMOD 5
+//#define MK_C_OFFSET_0 4
+//#define MK_C_OFFSET_1 16
+// Accel mode
+#define MOUSEKEY_MOVE_DELTA 5
+#define MOUSEKEY_MAX_SPEED 7
+//#define MOUSEKEY_INTEVAL 16
+#define MK_COMBINED
+//#define MK_KINETIC_SPEED
+//#define MOUSEKEY_BASE_SPEED 1000
