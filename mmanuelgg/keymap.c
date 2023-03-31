@@ -449,18 +449,42 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         // Volume control
         if (clockwise) {
-            tap_code(KC_VOLU);
+            switch (get_highest_layer(layer_state|default_layer_state)) {
+                case _FUNCTION:
+                    tap_code(KC_WH_R);
+                    break;
+                default:
+                    tap_code(KC_VOLU);
+            }
         } else {
-            tap_code(KC_VOLD);
+            switch (get_highest_layer(layer_state|default_layer_state)) {
+                case _FUNCTION:
+                    tap_code(KC_WH_L);
+                    break;
+                default:
+                    tap_code(KC_VOLD);
+            }
         }
     } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
-            //tap_code(KC_PGDN);
-            tap_code(KC_WH_U);
-        } else {
             //tap_code(KC_PGUP);
-            tap_code(KC_WH_D);
+            switch (get_highest_layer(layer_state|default_layer_state)) {
+                case _FUNCTION:
+                    tap_code(KC_WH_R);
+                    break;
+                default:
+                    tap_code(KC_WH_U);
+            }
+        } else {
+            //tap_code(KC_PGDN);
+            switch (get_highest_layer(layer_state|default_layer_state)) {
+                case _FUNCTION:
+                    tap_code(KC_WH_L);
+                    break;
+                default:
+                    tap_code(KC_WH_D);
+            }
         }
     }
     return false;
