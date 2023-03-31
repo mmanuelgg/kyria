@@ -473,6 +473,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 case _FUNCTION:
                     tap_code(KC_WH_R);
                     break;
+                case _NAV:
+                    tap_code(KC_RGHT);
+                    break;
                 default:
                     tap_code(KC_WH_U);
             }
@@ -481,6 +484,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             switch (get_highest_layer(layer_state|default_layer_state)) {
                 case _FUNCTION:
                     tap_code(KC_WH_L);
+                    break;
+                case _NAV:
+                    tap_code(KC_LEFT);
                     break;
                 default:
                     tap_code(KC_WH_D);
