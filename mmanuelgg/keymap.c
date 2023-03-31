@@ -456,9 +456,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
-            tap_code(KC_PGDN);
+            //tap_code(KC_PGDN);
+            tap_code(KC_WH_U);
         } else {
-            tap_code(KC_PGUP);
+            //tap_code(KC_PGUP);
+            tap_code(KC_WH_D);
         }
     }
     return false;
