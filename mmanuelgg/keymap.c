@@ -18,10 +18,12 @@
 #include "doom_logo.c"
 #include "stormlight_logo.c"
 #include "hollow_knight_logo.c"
-#define ANIM_INVERT false
-#define ANIM_RENDER_WPM true
-#define FAST_TYPE_WPM 45 //Switch to fast animation when over words per minute
 
+void leader_end_user(void){
+    if (leader_sequence_one_key(KC_Q)){
+        tap_code16(LGUI(KC_1));
+    }
+}
 char wpm_str[10];
 static uint16_t key_timer; // timer para controlar el tiempo
 static void refresh_rgb(void); // revisa si ha habido algún tipo de actividad
@@ -140,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
      CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , TD(TD_ENE), CTL_QUOT,
      KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                ADJUST , KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC , ALG_ENT , NAV , KC_APP
+                                ADJUST , KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC , ALG_ENT , NAV , QK_LEAD
     ),
 
 /*
@@ -161,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  ,KC_QUOTE,KC_COMM,  KC_DOT,   KC_P ,   KC_Y ,                                        KC_F,   KC_G ,  KC_C ,   KC_R ,  KC_L , KC_BSPC,
      CTL_ESC , KC_A ,  KC_O   ,  KC_E  ,   KC_U ,   KC_I ,                                        KC_D,   KC_H ,  KC_T ,   KC_N ,  KC_S , CTL_MINS,
      KC_LSFT ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_RSFT,
-                                 ADJUST, KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC ,ALG_ENT, NAV  , KC_APP
+                                 ADJUST, KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC ,ALG_ENT, NAV  , QK_LEAD
     ),
 
 /*
@@ -204,7 +206,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_ESC  ,  KC_Q  ,  KC_W  ,  KC_E ,  KC_R ,                                        KC_Y,  KC_U , KC_UP ,  KC_O ,  KC_P , KC_BSPC,
      KC_G    , KC_LSFT ,  KC_A  ,  KC_S  ,  KC_D ,  KC_F ,                                        KC_H,KC_LEFT,KC_DOWN,KC_RGHT,KC_SCLN, CTL_QUOT,
      KC_T    , KC_LCTL ,  KC_Z  ,  KC_X  ,  KC_C ,  KC_V , KC_B , KC_MUTE,     FKEYS  , KC_RBRC, TD(TD_ENE),   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                  ADJUST ,  KC_M, KC_LALT ,KC_SPC , GAME ,     SYM    , KC_SPC ,KC_RALT, NAV , KC_APP
+                                  ADJUST ,  KC_M, KC_LALT ,KC_SPC , GAME ,     SYM    , KC_SPC ,KC_RALT, NAV , QK_LEAD
     ),
 
 /*
@@ -287,7 +289,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FUNCTION] = LAYOUT(
       _______,  KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______,                                     KC_PAST,   KC_7 ,   KC_8 ,   KC_9 , KC_PSLS, _______,
       KC_CAPS,  KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     KC_PPLS,   KC_4 ,   KC_5 ,   KC_6 ,   KC_0 , _______,
-      _______,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, KC_PMNS,   KC_1 ,   KC_2 ,   KC_3 , KC_PEQL, _______,
+      KC_APP,  KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, KC_MPLY, _______, _______, KC_PMNS,   KC_1 ,   KC_2 ,   KC_3 , KC_PEQL, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -451,7 +453,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         if (clockwise) {
             switch (get_highest_layer(layer_state|default_layer_state)) {
                 case _FUNCTION:
-                    tap_code(KC_WH_R);
+                    tap_code(KC_MNXT);
+                    break;
+                case _SYM:
+                    tap_code(KC_RGHT);
+                    break;
+                case _NAV:
+                    tap_code(KC_DOWN);
                     break;
                 default:
                     tap_code(KC_VOLU);
@@ -459,7 +467,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         } else {
             switch (get_highest_layer(layer_state|default_layer_state)) {
                 case _FUNCTION:
-                    tap_code(KC_WH_L);
+                    tap_code(KC_MPRV);
+                    break;
+                case _SYM:
+                    tap_code(KC_LEFT);
+                    break;
+                case _NAV:
+                    tap_code(KC_UP);
                     break;
                 default:
                     tap_code(KC_VOLD);
