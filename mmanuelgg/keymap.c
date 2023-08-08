@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Base Layer: MIRYOKU
     [_MIRYOKU] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     CTL_ESC , LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),   KC_G ,                   KC_H,   RSFT_T(KC_J) , RCTL_T(KC_K) , RALT_T(KC_L) , RGUI_T(KC_N), CTL_QUOT,
+     CTL_ESC , LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),   KC_G ,                   KC_H,   RSFT_T(KC_J) , RCTL_T(KC_K) , RALT_T(KC_L) , RGUI_T(KC_SCLN), CTL_QUOT,
      KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE, FKEYS ,    KC_RBRC, KC_N,   KC_M ,KC_COMM, ALGR_T(KC_DOT) ,KC_SLSH, KC_RSFT,
             ADJUST , KC_LGUI,LT(_MEDR, KC_ESC),LT(_NAVR, KC_SPC),LT(_MOUR, KC_TAB),    LT(_SYM, KC_ENT), LT(_NUM, KC_BSPC) , LT(_FUNCTION, KC_DEL) , NAV , QK_LEAD
     ),
@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_MEDR] = LAYOUT(
       _______,  _______,  _______,   _______,   _______,   _______,                                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_CAPS, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT,_______,  _______,
       _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
                                 _______, _______,   _______ , _______, _______,        KC_MSTP,  KC_MPLY, KC_MUTE,  _______,  _______
     ),
