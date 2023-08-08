@@ -90,7 +90,6 @@ tap_dance_action_t tap_dance_actions[] = {
 enum layers {
     _QWERTY = 0,
     _DVORAK,
-//    _COLEMAK_DH,
     _MIRYOKU,
     _GAMING,
     _GAME,
@@ -108,7 +107,6 @@ enum layers {
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
-//#define COLEMAK  DF(_COLEMAK_DH)
 #define DVORAK   DF(_DVORAK)
 #define GAMING   DF(_GAMING)
 #define MIRYOKU  DF(_MIRYOKU)
@@ -204,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, KC_ASTR, KC_7, KC_8 , KC_9,   KC_0 ,                                     _______, KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR,
      _______, KC_PLUS, KC_4, KC_5 , KC_6, KC_EQL ,                                     KC_CIRC, KC_4, KC_5 , KC_6, KC_EQL , KC_PLUS,
      _______, KC_MINS, KC_1, KC_2 , KC_3, KC_SLSH, _______, _______, _______, KC_RCBR, KC_RBRC, KC_1, KC_2 , KC_3, KC_SLSH, KC_QUES,
-                                 _______, KC_0   , CW_TOGG, _______, _______, _______, _______, _______, _______, _______
+                        _______, _______, CW_TOGG, KC_0   , _______, _______, _______, _______, _______, _______
     ),
     [_MOUR] = LAYOUT(
       _______,  _______,  _______,   _______,   _______,   _______,                                        KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
@@ -212,28 +210,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______,  _______,  KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_D, _______, _______,
                                 _______, _______,   _______ , _______, _______,        KC_BTN3,  KC_BTN1, KC_BTN3,  KC_BTN4,  KC_BTN5
     ),
-/*
- * Base Layer: Colemak DH
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |  Bksp  |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   R  |   S  |   T  |   G  |                              |   M  |   N  |   E  |   I  |   O  |Ctrl/' "|
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   D  |   V  | [ {  |VolMut|  |F-keys|  ] } |   K  |   H  | ,  < | . >  | /  ? | RShift |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-/*
- *  [_COLEMAK_DH] = LAYOUT(
- *   KC_TAB  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
- *   CTL_ESC , KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , CTL_QUOT,
- *   KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
- *                               ADJUST, KC_LGUI, ALT_ENT, KC_SPC , NAV   ,     SYM    , KC_SPC ,KC_RALT, KC_RGUI, KC_APP
- *  ),
- */
+
 /*
  * Base Layer: GAMING
  *
@@ -418,9 +395,6 @@ static void render_status(void){
         case _DVORAK:
             oled_write_P(PSTR("DVORAK\n"), false);
             break;
-            //case _COLEMAK_DH:
-            //    oled_write_P(PSTR("Colemak-DH\n"), false);
-            //    break;
         case _GAMING:
             oled_write_P(PSTR("GAMING\n"), false);
             break;
@@ -549,7 +523,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
-            //tap_code(KC_PGUP);
             switch (get_highest_layer(layer_state|default_layer_state)) {
                 case _FUNCTION:
                     tap_code(KC_WH_R);
@@ -561,7 +534,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_WH_U);
             }
         } else {
-            //tap_code(KC_PGDN);
             switch (get_highest_layer(layer_state|default_layer_state)) {
                 case _FUNCTION:
                     tap_code(KC_WH_L);
@@ -584,7 +556,6 @@ void keyboard_post_init_user(void){
     layer_state_set_user(layer_state);
 }
 layer_state_t layer_state_set_user(layer_state_t state){
-    //switch (get_highest_layer(state)) {
     switch (get_highest_layer(default_layer_state)) {
         case _GAMING:
             rgblight_sethsv_noeeprom(HSV_CYAN);
@@ -596,7 +567,6 @@ layer_state_t layer_state_set_user(layer_state_t state){
             rgblight_sethsv_noeeprom(HSV_PURPLE);
             break;
     }
-    //return state;
     return state;
 }
 #endif
