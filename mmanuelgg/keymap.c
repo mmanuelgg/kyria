@@ -98,6 +98,12 @@ enum layers {
     _SYM,
     _FUNCTION,
     _ADJUST,
+    _NAVR,
+    _MEDR,
+    _NSSL,
+    _NSL,
+    _MOUR,
+    _FUNL
 };
 
 
@@ -106,12 +112,19 @@ enum layers {
 //#define COLEMAK  DF(_COLEMAK_DH)
 #define DVORAK   DF(_DVORAK)
 #define GAMING   DF(_GAMING)
+#define MIRYOKU   DF(_MIRYOKU)
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
 #define GAME     MO(_GAME)
+#define NAVR     MO(_NAVR)
+#define MOUR     MO(_MOUR)
+#define NSL      MO(_NSL)
+#define NSSL     MO(_NSSL)
+#define MEDR      MO(_MEDR)
+#define FUNL     MO(_FUNL)
 
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
 #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
@@ -166,28 +179,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LSFT ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_RSFT,
                                  ADJUST, KC_LGUI,ALT_T(KC_SPC),KC_ENT, NAV,     SYM    , KC_SPC ,ALG_ENT, NAV  , QK_LEAD
     ),
-/*
- * Base Layer: MIRYOKU
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |Ctrl/' "|
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |VolMut|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr|  Nav | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
+
+    // Base Layer: MIRYOKU
     [_MIRYOKU] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , TD(TD_ENE), CTL_QUOT,
-     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                ADJUST , KC_LGUI,ALT_T(KC_SPC),KC_ENT,NAV ,     SYM    , KC_SPC , ALG_ENT , NAV , QK_LEAD
+     CTL_ESC , LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),   KC_G ,                   KC_H,   RSFT_T(KC_J) , RCTL_T(KC_K) , RALT_T(KC_L) , RGUI_T(KC_N), CTL_QUOT,
+     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE, FKEYS ,    KC_RBRC, KC_N,   KC_M ,KC_COMM, ALGR_T(KC_DOT) ,KC_SLSH, KC_RSFT,
+                                ADJUST , KC_LGUI,LT(MEDR, KC_ESC),LT(NAVR, KC_SPC),    LT(MOUR, KC_TAB) , LT(NSSL, KC_ENT), LT(NSL, KC_BSPC) , LT(FUNL, KC_DEL) , NAV , QK_LEAD
     ),
 
+    [_NAVR] = LAYOUT(
+      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    ),
 
+    [_MEDR] = LAYOUT(
+      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    ),
+    [_NSSL] = LAYOUT(
+      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    ),
+    [_NSL] = LAYOUT(
+      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    ),
+    [_FUNL] = LAYOUT(
+      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    ),
+    [_MOUR] = LAYOUT(
+      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    ),
 /*
  * Base Layer: Colemak DH
  *
@@ -267,7 +304,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NAV] = LAYOUT(
-      _______, KC_LPAD, _______, _______, _______, _______,                                     KC_HOME, KC_END , KC_PGUP, KC_PGDN, KC_WH_U, KC_DEL,
+      KC_LPAD, _______, _______, _______, _______, _______,                                     KC_HOME, KC_END , KC_PGUP, KC_PGDN, KC_WH_U, KC_DEL,
       KC_MCTL, KC_ACL1, KC_BTN2, KC_MS_U, KC_BTN3, KC_BTN5,                                     KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_WH_D, KC_INS,
       KC_ACL0, KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN4, _______, KC_LGUI, _______, KC_WH_L, KC_WH_R, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_PSCR,
                                  _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_BTN5, _______

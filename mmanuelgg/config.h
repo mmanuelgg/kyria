@@ -41,9 +41,6 @@
 //#    define RGBLIGHT_LAYERS
 #endif
 
-// Lets you roll mod-tap keys
-#define IGNORE_MOD_TAP_INTERRUPT
-
 // Tiempo entre pulsaciones para tap dance
 #define TAPPING_TERM 150
 
