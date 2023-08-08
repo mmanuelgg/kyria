@@ -453,6 +453,24 @@ static void render_status(void){
         case _ADJUST:
             oled_write_P(PSTR("Adjust\n"), false);
             break;
+        case _NSSL:
+            oled_write_P(PSTR("NSSL\n"), false);
+            break;
+        case _NSL:
+            oled_write_P(PSTR("NSL\n"), false);
+            break;
+        case _MEDR:
+            oled_write_P(PSTR("MEDR\n"), false);
+            break;
+        case _NAVR:
+            oled_write_P(PSTR("NAVR\n"), false);
+            break;
+        case _FUNL:
+            oled_write_P(PSTR("FUNL\n"), false);
+            break;
+        case _MOUR:
+            oled_write_P(PSTR("MOUR\n"), false);
+            break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);
     }
