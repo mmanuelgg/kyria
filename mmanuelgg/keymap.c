@@ -101,7 +101,7 @@ enum layers {
     _NAVR,
     _MEDR,
     _NSSL,
-    _NSL,
+    _NUM,
     _MOUR,
 };
 
@@ -178,38 +178,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
      CTL_ESC , LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),   KC_G ,                   KC_H,   RSFT_T(KC_J) , RCTL_T(KC_K) , RALT_T(KC_L) , RGUI_T(KC_N), CTL_QUOT,
      KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE, FKEYS ,    KC_RBRC, KC_N,   KC_M ,KC_COMM, ALGR_T(KC_DOT) ,KC_SLSH, KC_RSFT,
-            ADJUST , KC_LGUI,LT(_MEDR, KC_ESC),LT(_NAVR, KC_SPC),LT(_MOUR, KC_TAB),    LT(_NSSL, KC_ENT), LT(_NSL, KC_BSPC) , LT(_FUNCTION, KC_DEL) , NAV , QK_LEAD
+            ADJUST , KC_LGUI,LT(_MEDR, KC_ESC),LT(_NAVR, KC_SPC),LT(_MOUR, KC_TAB),    LT(_SYM, KC_ENT), LT(_NUM, KC_BSPC) , LT(_FUNCTION, KC_DEL) , NAV , QK_LEAD
     ),
 
     [_NAVR] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                               KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, KC_CAPS,
+      _______,  _______,  _______,   _______,   _______,   _______,                                       KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
+      KC_CAPS,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
       _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
                                 _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
     ),
 
     [_MEDR] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______,
+      _______,  _______,  _______,   _______,   _______,   _______,                                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_CAPS, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______,
       _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
                                 _______, _______,   _______ , _______, _______,        KC_MSTP,  KC_MPLY, KC_MUTE,  _______,  _______
     ),
     [_NSSL] = LAYOUT(
-     KC_GRV ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                      _______, KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR ,
+     KC_GRV ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                      KC_6   , KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR,
      KC_TILD , KC_EXLM,  KC_AT , KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_4, KC_5 , KC_6, KC_EQL , KC_PLUS,
      KC_PIPE , KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, KC_LCBR, _______, _______, KC_RCBR, KC_RBRC, KC_1, KC_2 , KC_3, KC_SLSH, KC_QUES,
                                  _______, _______, CW_TOGG, _______, _______, _______, _______, _______, _______, _______
     ),
-    [_NSL] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                               KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
-                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    [_NUM] = LAYOUT(
+     _______, KC_ASTR, KC_7, KC_8 , KC_9,   KC_0 ,                                     _______, KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR,
+     _______, KC_PLUS, KC_4, KC_5 , KC_6, KC_EQL ,                                     KC_CIRC, KC_4, KC_5 , KC_6, KC_EQL , KC_PLUS,
+     _______, KC_MINS, KC_1, KC_2 , KC_3, KC_SLSH, _______, _______, _______, KC_RCBR, KC_RBRC, KC_1, KC_2 , KC_3, KC_SLSH, KC_QUES,
+                                 _______, KC_0   , CW_TOGG, _______, _______, _______, _______, _______, _______, _______
     ),
     [_MOUR] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                               KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                               KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,   _______, _______,
-      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_D, KC_END,   _______,
+      _______,  _______,  _______,   _______,   _______,   _______,                                        KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
+      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                        KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______,
+      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______,  _______,  KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_D, _______, _______,
                                 _______, _______,   _______ , _______, _______,        KC_BTN3,  KC_BTN1, KC_BTN3,  KC_BTN4,  KC_BTN5
     ),
 /*
@@ -443,8 +443,8 @@ static void render_status(void){
         case _NSSL:
             oled_write_P(PSTR("NSSL\n"), false);
             break;
-        case _NSL:
-            oled_write_P(PSTR("NSL\n"), false);
+        case _NUM:
+            oled_write_P(PSTR("NUM\n"), false);
             break;
         case _MEDR:
             oled_write_P(PSTR("MEDR\n"), false);
