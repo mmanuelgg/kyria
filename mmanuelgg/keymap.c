@@ -416,7 +416,7 @@ static void render_status(void){
             oled_write_P(PSTR("MIRYOKU\n"), false);
             break;
         case _DVORAK:
-            oled_write_P(PSTR("Dvorak\n"), false);
+            oled_write_P(PSTR("DVORAK\n"), false);
             break;
             //case _COLEMAK_DH:
             //    oled_write_P(PSTR("Colemak-DH\n"), false);
@@ -429,16 +429,16 @@ static void render_status(void){
             break;
 
         case _NAV:
-            oled_write_P(PSTR("Nav\n"), false);
+            oled_write_P(PSTR("NAV\n"), false);
             break;
         case _SYM:
-            oled_write_P(PSTR("Sym\n"), false);
+            oled_write_P(PSTR("SYM\n"), false);
             break;
         case _FUNCTION:
-            oled_write_P(PSTR("Function\n"), false);
+            oled_write_P(PSTR("FUNCTION\n"), false);
             break;
         case _ADJUST:
-            oled_write_P(PSTR("Adjust\n"), false);
+            oled_write_P(PSTR("ADJUST\n"), false);
             break;
         case _NSSL:
             oled_write_P(PSTR("NSSL\n"), false);
