@@ -91,6 +91,7 @@ enum layers {
     _QWERTY = 0,
     _DVORAK,
 //    _COLEMAK_DH,
+    _MIRYOKU,
     _GAMING,
     _GAME,
     _NAV,
@@ -165,6 +166,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LSFT ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_RSFT,
                                  ADJUST, KC_LGUI,ALT_T(KC_SPC),KC_ENT, NAV,     SYM    , KC_SPC ,ALG_ENT, NAV  , QK_LEAD
     ),
+/*
+ * Base Layer: MIRYOKU
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |Ctrl/' "|
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |VolMut|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr|  Nav | Menu |
+ *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_MIRYOKU] = LAYOUT(
+     KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
+     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , TD(TD_ENE), CTL_QUOT,
+     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+                                ADJUST , KC_LGUI,ALT_T(KC_SPC),KC_ENT,NAV ,     SYM    , KC_SPC , ALG_ENT , NAV , QK_LEAD
+    ),
+
 
 /*
  * Base Layer: Colemak DH
@@ -308,7 +330,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, QWERTY , GAMING , QWERTY , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
+      _______, QWERTY , GAMING , MIRYOKU , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
       _______, _______, _______, DVORAK , _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
       _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
@@ -366,6 +388,9 @@ static void render_status(void){
         case _QWERTY:
             oled_write_P(PSTR("QWERTY\n"), false);
             break;
+        case _MIRYOKU:
+            oled_write_P(PSTR("MIRYOKU\n"), false);
+            break;
         case _DVORAK:
             oled_write_P(PSTR("Dvorak\n"), false);
             break;
@@ -418,6 +443,9 @@ static void render_image(void){
 
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _QWERTY:
+            oled_write_raw_P(hollow_knight_logo, sizeof(hollow_knight_logo));
+            break;
+        case _MIRYOKU:
             oled_write_raw_P(hollow_knight_logo, sizeof(hollow_knight_logo));
             break;
         case _DVORAK:
