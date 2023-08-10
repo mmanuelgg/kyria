@@ -42,7 +42,7 @@
 #endif
 
 // Tiempo entre pulsaciones para tap dance
-#define TAPPING_TERM 50
+#define TAPPING_TERM 200
 
 // Mouse config
 // Constant mode
