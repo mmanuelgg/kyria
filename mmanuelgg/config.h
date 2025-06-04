@@ -22,6 +22,7 @@
 
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_OLED_ENABLE
+#define EE_HANDS
 
 #ifdef RGBLIGHT_ENABLE
 // Default
@@ -43,6 +44,7 @@
 
 // Tiempo entre pulsaciones para tap dance
 #define TAPPING_TERM 200
+#define PERMISSIVE_HOLD
 
 // Mouse config
 // Constant mode
