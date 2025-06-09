@@ -1,0 +1,20 @@
+{
+  "features": {
+    "bootmagic": true,
+    "tap_dance": true,
+    "mousekey": true,
+    "caps_word": true,
+    "leader": true,
+    "console": true,
+    "rgblight": true,
+    "split": {
+      "enabled": true
+    },
+    "encoder": true,
+    "oled": true,
+    "rgb_matrix": false
+  },
+  "oled": {
+    "driver": "ssd1306"
+  }
+}

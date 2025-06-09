@@ -24,22 +24,30 @@
 #define SPLIT_OLED_ENABLE
 #define EE_HANDS
 
+// #ifdef RGBLIGHT_ENABLE
+// // Default
+// #    define RGBLIGHT_EFFECT_BREATHING
+// #    define RGBLIGHT_HUE_STEP 8
+// #    define RGBLIGHT_SAT_STEP 8
+// #    define RGBLIGHT_VAL_STEP 8
+// #    ifndef RGBLIGHT_LIMIT_VAL
+// #    define RGBLIGHT_LIMIT_VAL 150
+// #    endif
+// // New
+// #    define RGBLIGHT_SLEEP
+// #    define RGBLIGHT_TIMEOUT 60000
+// #    define RGBLIGHT_SPLIT
+// //#    define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING
+// #    define RGBLIGHT_DEFAULT_HUE 250
+// //#    define RGBLIGHT_LAYERS
+// #endif
 #ifdef RGBLIGHT_ENABLE
-// Default
-#    define RGBLIGHT_EFFECT_BREATHING
-#    define RGBLIGHT_HUE_STEP 8
-#    define RGBLIGHT_SAT_STEP 8
-#    define RGBLIGHT_VAL_STEP 8
-#    ifndef RGBLIGHT_LIMIT_VAL
-#    	define RGBLIGHT_LIMIT_VAL 150
-#    endif
-// New
-#    define RGBLIGHT_SLEEP
-#    define RGBLIGHT_TIMEOUT 60000
-#    define RGBLIGHT_SPLIT
-//#    define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING
-#    define RGBLIGHT_DEFAULT_HUE 250
-//#    define RGBLIGHT_LAYERS
+    // #define RGBLIGHT_LIMIT_VAL 150  // max brightness cap (adjust to your liking)
+    #define RGBLIGHT_SLEEP          // turn off underglow when suspended
+    #define RGBLIGHT_TIMEOUT 60000  // timeout to turn off underglow
+    #define RGBLIGHT_SPLIT          // split keyboard underglow sync
+    // Don't enable animations
+    // #define RGBLIGHT_EFFECT_BREATHING  <-- remove animations
 #endif
 
 // Tiempo entre pulsaciones para tap dance
@@ -56,7 +64,4 @@
 // Accel mode
 #define MOUSEKEY_MOVE_DELTA 5
 #define MOUSEKEY_MAX_SPEED 7
-//#define MOUSEKEY_INTEVAL 16
 #define MK_COMBINED
-//#define MK_KINETIC_SPEED
-//#define MOUSEKEY_BASE_SPEED 1000

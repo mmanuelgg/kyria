@@ -19,11 +19,6 @@
 #include "stormlight_logo.c"
 #include "hollow_knight_logo.c"
 
-void leader_end_user(void){
-    if (leader_sequence_one_key(KC_Q)){
-        tap_code16(LGUI(KC_1));
-    }
-}
 char wpm_str[10];
 static uint16_t key_timer; // timer para controlar el tiempo
 static void refresh_rgb(void); // revisa si ha habido algún tipo de actividad
@@ -89,33 +84,31 @@ tap_dance_action_t tap_dance_actions[] = {
 
 enum layers {
     _QWERTY = 0,
-    _DVORAK,
     _MIRYOKU,
-    _GAMING,
-    _GAME,
+    // _GAMING,
+    // _GAME,
     _NAV,
     _SYM,
     _FUNCTION,
     _ADJUST,
-    _NAVR,
-    _MEDIA,
-    _SYMBOLS,
+    // _NAVR,
+    // _MEDIA,
+    // _SYMBOLS,
     _NUM,
-    _MOUSE,
+    // _MOUSE,
 };
 
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
-#define DVORAK   DF(_DVORAK)
-#define GAMING   DF(_GAMING)
+// #define GAMING   DF(_GAMING)
 #define MIRYOKU  DF(_MIRYOKU)
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
 #define FKEYS    MO(_FUNCTION)
 #define ADJUST   MO(_ADJUST)
-#define GAME     MO(_GAME)
+// #define GAME     MO(_GAME)
 
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
 #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
@@ -145,30 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
-     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , KC_SCLN, CTL_QUOT, //TD(TD_ENE), CTL_QUOT,
+     CTL_ESC , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L , KC_SCLN, CTL_QUOT,
      KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                ADJUST , KC_LGUI,ALT_T(KC_SPC),KC_ENT,NAV ,     SYM    , KC_SPC , ALG_ENT , NAV , QK_LEAD
-    ),
-
-/*
- * Base Layer: Dvorak
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   | ' "  | , <  | . >  |   P  |   Y  |                              |   F  |   G  |   C  |   R  |   L  |  Bksp  |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   O  |   E  |   U  |   I  |                              |   D  |   H  |   T  |   N  |   S  |Ctrl/- _|
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift | ; :  |   Q  |   J  |   K  |   X  | [ {  |VolMut|  |F-keys|  ] } |   B  |   M  |   W  |   V  |   Z  | RShift |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_DVORAK] = LAYOUT(
-     KC_TAB  ,KC_QUOTE,KC_COMM,  KC_DOT,   KC_P ,   KC_Y ,                                        KC_F,   KC_G ,  KC_C ,   KC_R ,  KC_L , KC_BSPC,
-     CTL_ESC , KC_A ,  KC_O   ,  KC_E  ,   KC_U ,   KC_I ,                                        KC_D,   KC_H ,  KC_T ,   KC_N ,  KC_S , CTL_MINS,
-     KC_LSFT ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X , KC_LBRC,KC_MUTE,     FKEYS  , KC_RBRC, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_RSFT,
-                                 ADJUST, KC_LGUI,ALT_T(KC_SPC),KC_ENT, NAV,     SYM    , KC_SPC ,ALG_ENT, NAV  , QK_LEAD
+                                ADJUST , KC_LGUI,ALT_T(KC_SPC),KC_ENT,NAV ,     SYM    , KC_SPC , ALG_ENT , NAV , KC_APP
     ),
 
     // Base Layer: MIRYOKU
@@ -176,40 +148,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                        KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
      CTL_ESC , LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F),   KC_G ,                   KC_H,   RSFT_T(KC_J) , RCTL_T(KC_K) , RALT_T(KC_L) , RGUI_T(KC_SCLN), CTL_QUOT,
      KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_MUTE, FKEYS ,    KC_RBRC, KC_N,   KC_M ,KC_COMM, ALGR_T(KC_DOT) ,KC_SLSH, KC_RSFT,
-            ADJUST , KC_LGUI,LT(_MEDIA, KC_ESC),LT(_NAVR, KC_SPC),LT(_MOUSE, KC_TAB),    LT(_SYM, KC_BSPC), LT(_NUM, KC_ENT) , LT(_FUNCTION, KC_DEL) , NAV , QK_LEAD
+                        ADJUST, NAV, LGUI_T(KC_ESC), LT(_NAV, KC_SPC), KC_TAB,   LT(_SYM, KC_ENT), LT(_NUM, KC_BSPC), LT(_FUNCTION, KC_DEL), KC_RALT, KC_APP
+        // ADJUST, LGUI_T(KC_ESC), LT(_NAV, KC_SPC), LT(_SYM, KC_BSPC), LT(_NUM, KC_ENT), LT(_FUNCTION, KC_DEL), KC_APP 
+            // ADJUST , KC_LGUI,LT(_MEDIA, KC_ESC),LT(_NAVR, KC_SPC),LT(_MOUSE, KC_TAB),    LT(_SYM, KC_BSPC), LT(_NUM, KC_ENT) , LT(_FUNCTION, KC_DEL) , NAV , QK_LEAD
     ),
 
-    [_NAVR] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                                       KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
-      KC_CAPS,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
-      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
-                                _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
-    ),
+    // [_NAVR] = LAYOUT(
+    //   _______,  _______,  _______,   _______,   _______,   _______,                                       KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
+    //   KC_CAPS,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
+    //   _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+    //                             _______, _______,   _______ , _______, _______,        KC_ENT,  KC_BSPC, KC_DEL,  _______,  _______
+    // ),
 
-    [_MEDIA] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT,_______,  _______,
-      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
-                                _______, _______,   _______ , _______, _______,        KC_MSTP,  KC_MPLY, KC_MUTE,  _______,  _______
-    ),
-    [_SYMBOLS] = LAYOUT(
-     KC_GRV ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                      KC_6   , KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR,
-     KC_TILD , KC_EXLM,  KC_AT , KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_4, KC_5 , KC_6, KC_EQL , KC_PLUS,
-     KC_PIPE , KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, KC_LCBR, _______, _______, KC_RCBR, KC_RBRC, KC_1, KC_2 , KC_3, KC_SLSH, KC_QUES,
-                                 _______, _______, CW_TOGG, _______, _______, _______, _______, _______, _______, _______
-    ),
+    // [_MEDIA] = LAYOUT(
+    //   _______,  _______,  _______,   _______,   _______,   _______,                                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______,
+    //   _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                       KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT,_______,  _______,
+    //   _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______, _______,  _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,   _______,
+    //                             _______, _______,   _______ , _______, _______,        KC_MSTP,  KC_MPLY, KC_MUTE,  _______,  _______
+    // ),
+    // [_SYMBOLS] = LAYOUT(
+    //  KC_GRV ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                      KC_6   , KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR,
+    //  KC_TILD , KC_EXLM,  KC_AT , KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_4, KC_5 , KC_6, KC_EQL , KC_PLUS,
+    //  KC_PIPE , KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, KC_LCBR, _______, _______, KC_RCBR, KC_RBRC, KC_1, KC_2 , KC_3, KC_SLSH, KC_QUES,
+    //                              _______, _______, CW_TOGG, _______, _______, _______, _______, _______, _______, _______
+    // ),
     [_NUM] = LAYOUT(
      _______, KC_ASTR, KC_7, KC_8 , KC_9,   KC_0 ,                                     _______, KC_7, KC_8 , KC_9,   KC_0 , KC_ASTR,
      _______, KC_PLUS, KC_4, KC_5 , KC_6, KC_EQL ,                                     KC_CIRC, KC_4, KC_5 , KC_6, KC_EQL , KC_PLUS,
      _______, KC_MINS, KC_1, KC_2 , KC_3, KC_SLSH, _______, _______, _______, KC_RCBR, KC_RBRC, KC_1, KC_2 , KC_3, KC_SLSH, KC_QUES,
                         _______, _______, CW_TOGG, KC_0   , _______, _______, _______, _______, _______, _______
     ),
-    [_MOUSE] = LAYOUT(
-      _______,  _______,  _______,   _______,   _______,   _______,                                        KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
-      _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                        KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______,
-      _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______,  _______,  KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_D, _______, _______,
-                                _______, _______,   _______ , _______, _______,        KC_BTN3,  KC_BTN1, KC_BTN2,  KC_BTN4,  KC_BTN5
-    ),
+    // [_MOUSE] = LAYOUT(
+    //   _______,  _______,  _______,   _______,   _______,   _______,                                        KC_COPY, KC_UNDO, KC_CUT,  KC_AGIN, KC_PSTE, _______,
+    //   _______,  KC_LGUI, KC_LALT , KC_LCTL  , KC_LSFT  ,   _______,                                        KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______,
+    //   _______,  _______,   KC_ALGR, _______,   _______ ,   _______, _______, _______,  _______,  _______,  KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_D, _______, _______,
+    //                             _______, _______,   _______ , _______, _______,        KC_BTN3,  KC_BTN1, KC_BTN2,  KC_BTN4,  KC_BTN5
+    // ),
 
 /*
  * Base Layer: GAMING
@@ -225,12 +199,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_GAMING] = LAYOUT(
-     KC_TAB  , KC_ESC  ,  KC_Q  ,  KC_W  ,  KC_E ,  KC_R ,                                        KC_Y,  KC_U , KC_UP ,  KC_O ,  KC_P , KC_BSPC,
-     KC_G    , KC_LSFT ,  KC_A  ,  KC_S  ,  KC_D ,  KC_F ,                                        KC_H,KC_LEFT,KC_DOWN,KC_RGHT,KC_SCLN, CTL_QUOT,
-     KC_T    , KC_LCTL ,  KC_Z  ,  KC_X  ,  KC_C ,  KC_V , KC_B , KC_MUTE,     FKEYS  , KC_RBRC, TD(TD_ENE),   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
-                                  ADJUST ,  KC_M, KC_LALT ,KC_SPC , GAME ,     SYM    , KC_SPC ,KC_RALT, NAV , QK_LEAD
-    ),
+    // [_GAMING] = LAYOUT(
+    //  KC_TAB  , KC_ESC  ,  KC_Q  ,  KC_W  ,  KC_E ,  KC_R ,                                        KC_Y,  KC_U , KC_UP ,  KC_O ,  KC_P , KC_BSPC,
+    //  KC_G    , KC_LSFT ,  KC_A  ,  KC_S  ,  KC_D ,  KC_F ,                                        KC_H,KC_LEFT,KC_DOWN,KC_RGHT,KC_SCLN, CTL_QUOT,
+    //  KC_T    , KC_LCTL ,  KC_Z  ,  KC_X  ,  KC_C ,  KC_V , KC_B , KC_MUTE,     FKEYS  , KC_RBRC, TD(TD_ENE),   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+    //                               ADJUST ,  KC_M, KC_LALT ,KC_SPC , GAME ,     SYM    , KC_SPC ,KC_RALT, NAV , QK_LEAD
+    // ),
 
 /*
  * Game Layer
@@ -246,12 +220,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-     [_GAME] = LAYOUT(
-       _______,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                     _______, _______, _______, _______, _______, _______,
-       _______,   KC_I ,   KC_J ,  KC_K ,   KC_L  , _______,                                     _______, _______, _______, _______, _______, KC_ENT ,
-       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-     ),
+     // [_GAME] = LAYOUT(
+     //   _______,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                     _______, _______, _______, _______, _______, _______,
+     //   _______,   KC_I ,   KC_J ,  KC_K ,   KC_L  , _______,                                     _______, _______, _______, _______, _______, KC_ENT ,
+     //   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+     //                              _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+     // ),
 
 /*
  * Nav Layer: Media, navigation
@@ -322,7 +296,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |QWERTY|GAMING|QWERTY|      |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |Dvorak|      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
+ * |        |      |      |      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |Colmak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -331,8 +305,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, QWERTY , GAMING , MIRYOKU , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
-      _______, _______, _______, DVORAK , _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
+      // _______, QWERTY , GAMING , MIRYOKU , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
+      _______, QWERTY , _______, MIRYOKU , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
+      _______, _______, _______, _______ , _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
       _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
                                  _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
     ),
@@ -392,15 +367,12 @@ static void render_status(void){
         case _MIRYOKU:
             oled_write_P(PSTR("MIRYOKU\n"), false);
             break;
-        case _DVORAK:
-            oled_write_P(PSTR("DVORAK\n"), false);
-            break;
-        case _GAMING:
-            oled_write_P(PSTR("GAMING\n"), false);
-            break;
-        case _GAME:
-            oled_write_P(PSTR("GAME\n"), false);
-            break;
+        // case _GAMING:
+        //     oled_write_P(PSTR("GAMING\n"), false);
+        //     break;
+        // case _GAME:
+        //     oled_write_P(PSTR("GAME\n"), false);
+        //     break;
 
         case _NAV:
             oled_write_P(PSTR("NAV\n"), false);
@@ -414,21 +386,21 @@ static void render_status(void){
         case _ADJUST:
             oled_write_P(PSTR("ADJUST\n"), false);
             break;
-        case _SYMBOLS:
-            oled_write_P(PSTR("SYMBOLS\n"), false);
-            break;
+        // case _SYMBOLS:
+        //     oled_write_P(PSTR("SYMBOLS\n"), false);
+        //     break;
         case _NUM:
             oled_write_P(PSTR("NUM\n"), false);
             break;
-        case _MEDIA:
-            oled_write_P(PSTR("MEDIA\n"), false);
-            break;
-        case _NAVR:
-            oled_write_P(PSTR("NAVR\n"), false);
-            break;
-        case _MOUSE:
-            oled_write_P(PSTR("MOUSE\n"), false);
-            break;
+        // case _MEDIA:
+        //     oled_write_P(PSTR("MEDIA\n"), false);
+        //     break;
+        // case _NAVR:
+        //     oled_write_P(PSTR("NAVR\n"), false);
+        //     break;
+        // case _MOUSE:
+        //     oled_write_P(PSTR("MOUSE\n"), false);
+        //     break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);
     }
@@ -459,14 +431,11 @@ static void render_image(void){
             oled_write_raw_P(hollow_knight_logo, sizeof(hollow_knight_logo));
             break;
         case _MIRYOKU:
-            oled_write_raw_P(hollow_knight_logo, sizeof(hollow_knight_logo));
-            break;
-        case _DVORAK:
             oled_write_raw_P(stormlight_logo, sizeof(stormlight_logo));
             break;
-        case _GAMING:
-            oled_write_raw_P(doom_logo, sizeof(doom_logo));
-            break;
+        // case _GAMING:
+        //     oled_write_raw_P(doom_logo, sizeof(doom_logo));
+        //     break;
         default:
             oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
     }
@@ -550,19 +519,40 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 #endif
 
-#ifdef RGBLIGHT_LAYERS
-void keyboard_post_init_user(void){
+// #ifdef RGBLIGHT_LAYERS
+// void keyboard_post_init_user(void){
+//     rgblight_enable_noeeprom();
+//     layer_state_set_user(layer_state);
+// }
+// layer_state_t layer_state_set_user(layer_state_t state){
+//     switch (get_highest_layer(default_layer_state)) {
+//         // case _GAMING:
+//         //     rgblight_sethsv_noeeprom(HSV_CYAN);
+//         //     break;
+//         case _MIRYOKU:
+//             rgblight_sethsv_noeeprom(HSV_BLUE);
+//             break;
+//         default:
+//             rgblight_sethsv_noeeprom(HSV_PURPLE);
+//             break;
+//     }
+//     return state;
+// }
+// #endif
+#ifdef RGBLIGHT_ENABLE
+void keyboard_post_init_user(void) {
     rgblight_enable_noeeprom();
     layer_state_set_user(layer_state);
 }
-layer_state_t layer_state_set_user(layer_state_t state){
-    switch (get_highest_layer(default_layer_state)) {
-        case _GAMING:
-            rgblight_sethsv_noeeprom(HSV_CYAN);
-            break;
-        case _DVORAK:
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _MIRYOKU:
             rgblight_sethsv_noeeprom(HSV_BLUE);
             break;
+        // case _GAMING:
+        //     rgblight_sethsv_noeeprom(HSV_CYAN);
+        //     break;
         default:
             rgblight_sethsv_noeeprom(HSV_PURPLE);
             break;
